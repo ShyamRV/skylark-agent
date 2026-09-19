@@ -18,6 +18,8 @@ export const metricNames = [
   "average_cycle_time",
   "linked_coverage",
   "data_quality_summary",
+  "closing_this_month_value",
+  "sector_execution_risk",
 ] as const;
 
 export const queryPlanSchema = z.object({

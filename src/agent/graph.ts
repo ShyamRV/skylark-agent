@@ -36,6 +36,8 @@ export type AgentResponse = {
   result?: MetricResult;
   results?: MetricResult[];
   requestId: string;
+  threadId: string;
+  interactive?: Record<string, unknown>;
 };
 
 export type AgentGraphDependencies = {
@@ -213,17 +215,18 @@ export async function runBusinessIntelligenceGraph(
       },
     },
   );
-  return {
-    type: state.responseType ?? "answer",
-    answer: state.answer,
-    message: state.message,
-    workflow: state.workflow,
-    plan: state.plan,
-    plans: state.plans,
-    result: state.result,
-    results: state.results,
-    requestId: state.context.requestId,
-  };
+return {
+  type: state.responseType ?? "answer",
+  answer: state.answer,
+  message: state.message,
+  workflow: state.workflow,
+  plan: state.plan,
+  plans: state.plans,
+  result: state.result,
+  results: state.results,
+  requestId: state.context.requestId,
+  threadId: state.context.threadId,
+};
 }
 
 function workflowLabel(workflow: WorkflowName) {
@@ -235,3 +238,4 @@ function workflowLabel(workflow: WorkflowName) {
     data_quality_review: "Data quality review",
   }[workflow];
 }
+

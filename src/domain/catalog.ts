@@ -110,6 +110,22 @@ export const METRIC_CATALOG = {
       "Count of normalization and source-read warnings in the current snapshot, grouped by warning type.",
     unit: "count",
   },
+
+  closing_this_month_value: {
+    title: "Closing this month value",
+    entity: "deals",
+    definition:
+      "Sum of open deal amounts with an expected close date within the current calendar month.",
+    unit: "currency",
+  },
+
+  sector_execution_risk: {
+    title: "Sector execution risk",
+    entity: "work_orders",
+    definition:
+      "Work-order execution risk summarized by sector using overdue and due-soon operational records.",
+    unit: "count",
+  },
 } as const;
 
 export type MetricName = keyof typeof METRIC_CATALOG;

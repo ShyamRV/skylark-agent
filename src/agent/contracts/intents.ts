@@ -1,4 +1,4 @@
-import { z } from "zod";
+﻿import { z } from "zod";
 
 export const businessIntents = [
   "PIPELINE_ANALYSIS",
@@ -29,16 +29,14 @@ export const queryAnalysisSchema = z.object({
   board: boardScopeSchema.default("deals"),
   sector: z.string().min(1).max(80).nullable().default(null),
   owner: z.string().min(1).max(80).nullable().default(null),
-  period: z
-    .enum([
-      "all_time",
-      "this_quarter",
-      "last_quarter",
-      "this_year",
-      "current_month",
-      "next_30_days",
-    ])
-    .default("all_time"),
+  period: z.enum([
+    "all_time",
+    "this_quarter",
+    "last_quarter",
+    "this_year",
+    "current_month",
+    "next_30_days",
+  ]).default("all_time"),
   ambiguous: z.boolean().default(false),
   clarification: z.string().nullable().default(null),
   followUp: z.boolean().default(false),
@@ -57,3 +55,15 @@ export const conversationContextSchema = z.object({
 });
 
 export type ConversationContext = z.infer<typeof conversationContextSchema>;
+
+export function conversationDefaults(): ConversationContext {
+  return {
+    activeBoard: null,
+    activeSector: null,
+    activeOwner: null,
+    activePeriod: null,
+    lastIntent: null,
+    lastMetric: null,
+    lastRequestId: null,
+  };
+}

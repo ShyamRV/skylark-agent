@@ -1,4 +1,4 @@
-import type { QueryPlan } from "./queryPlan";
+﻿import type { QueryPlan } from "./queryPlan";
 import type { EvidenceSummary } from "./contracts/response";
 import type { DataSnapshot, MetricResult } from "@/domain/types";
 import { METRIC_CATALOG } from "@/domain/catalog";
@@ -37,7 +37,7 @@ export function buildEvidence(
   const records: EvidenceRecord[] = [];
   for (const plan of plans) {
     const definition = METRIC_CATALOG[plan.metric];
-    if (definition.entity === "deals" || definition.entity === "cross_board") {
+    if (definition.entity === "deals" || definition.entity === "work_orders") {
       boards.add("Deals");
       for (const deal of snapshot.deals.slice(0, 40)) {
         records.push({
@@ -52,8 +52,7 @@ export function buildEvidence(
       }
     }
     if (
-      definition.entity === "work_orders" ||
-      definition.entity === "cross_board"
+      definition.entity === "work_orders"
     ) {
       boards.add("Work Orders");
       for (const order of snapshot.workOrders.slice(0, 40)) {
@@ -101,3 +100,5 @@ export function getEvidencePage(
     records: stored.records.slice(start, start + pageSize),
   };
 }
+
+
